@@ -120,7 +120,10 @@ def Category(category=None, link=None):
             url = BASE_URL + url
         thumb   = item.xpath('.//img')[0].get('src')
         date    = Datetime.ParseDate(item.xpath('.//span[@class="medialist-date"]')[0].text).date()
-        duration= Datetime.MillisecondsFromString(item.xpath('.//span[@class="medialist-duration"]')[0].text)
+        try:
+            duration= Datetime.MillisecondsFromString(item.xpath('.//span[@class="medialist-duration"]')[0].text)
+        except:
+            pass
         title   = item.xpath('.//div[@class="medialist-title"]')[0].text
         
         oc.add(
@@ -157,7 +160,10 @@ def ShowsMenu(title, link):
             url = BASE_URL + url
         thumb   = item.xpath('.//img')[0].get('src')
         date    = Datetime.ParseDate(item.xpath('.//span[@class="medialist-date"]')[0].text).date()
-        duration= Datetime.MillisecondsFromString(item.xpath('.//span[@class="medialist-duration"]')[0].text)
+        try:
+            duration= Datetime.MillisecondsFromString(item.xpath('.//span[@class="medialist-duration"]')[0].text)
+        except:
+            pass
         title   = item.xpath('.//div[@class="medialist-title"]')[0].text
         
         oc.add(
@@ -187,7 +193,10 @@ def Featured(category=None):
         thumb   = RE_THUMB_URL.search(item.xpath('.//div[@class="featured-content"]')[0].get('style')).group('url')
         title   = item.xpath('.//p[@class="featured-title"]')[0].text
         date    = Datetime.ParseDate(item.xpath('.//p[@class="featured-date"]')[0].text).date()
-        duration= Datetime.MillisecondsFromString(item.xpath('.//p[@class="featured-duration"]')[0].text)
+        try:
+            duration= Datetime.MillisecondsFromString(item.xpath('.//p[@class="featured-duration"]')[0].text)
+        except:
+            pass
         summary = item.xpath('.//p[@class="featured-description"]')[0].text
         
         oc.add(
