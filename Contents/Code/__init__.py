@@ -120,7 +120,10 @@ def Category(category=None, link=None):
             url = BASE_URL + url
         thumb   = item.xpath('.//img')[0].get('src')
         date    = Datetime.ParseDate(item.xpath('.//span[@class="medialist-date"]')[0].text).date()
-        duration= Datetime.MillisecondsFromString(item.xpath('.//span[@class="medialist-duration"]')[0].text)
+        try:
+            duration= Datetime.MillisecondsFromString(item.xpath('.//span[@class="medialist-duration"]')[0].text)
+        except:
+            pass
         title   = item.xpath('.//div[@class="medialist-title"]')[0].text
         
         oc.add(
