@@ -123,22 +123,29 @@ def Category(category=None, link=None):
         ))
 
     for item in page.xpath('//li[contains(@class,"medialist-item")]'):
-
-        url = item.xpath('./a')[0].get('href')
-
+	try:
+            url = item.xpath('./a')[0].get('href')
+	except:
+	    url = ''	
         if BASE_URL not in url:
             url = BASE_URL + url
-
-        thumb = item.xpath('.//img')[0].get('src')
-        date = Datetime.ParseDate(item.xpath('.//span[@class="medialist-date"]')[0].text).date()
-
+	try:
+	    thumb = item.xpath('.//img')[0].get('src')
+        except:
+            thumb = ''
+        try:    
+            date = Datetime.ParseDate(item.xpath('.//span[@class="medialist-date"]')[0].text).date()
+	except:
+	    import datetime
+	    date = datetime.date(1984, 6, 24)
         try:
             duration = Datetime.MillisecondsFromString(item.xpath('.//span[@class="medialist-duration"]')[0].text)
         except:
             duration = 0
-
-        title= item.xpath('.//div[@class="medialist-title"]')[0].text
-
+	try:
+            title= item.xpath('.//div[@class="medialist-title"]')[0].text
+	except:
+	    title = ''	
         oc.add(VideoClipObject(
             url = url,
             title = title,
