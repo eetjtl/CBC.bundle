@@ -84,7 +84,7 @@ def LiveSports():
     for item in page.xpath('//section[@class="category-content full"]//li[@class="medialist-item"]'):
 
        link = item.xpath('.//a')[0].get('href')
-       if not "watchcbc.ca" in url: 
+       if not "watch.cbc.ca" in url: 
         if BASE_URL not in link:
 	        link = BASE_URL + link
         thumb = item.xpath('.//img')[0].get('src')
@@ -126,7 +126,7 @@ def Category(category=None, link=None):
     for item in page.xpath('//li[contains(@class,"medialist-item")]'):
 
        url = item.xpath('.//a')[0].get('href')
-       if not "watchcbc.ca" in url:
+       if not "watch.cbc.ca" in url:
         if BASE_URL not in url:
             url = BASE_URL + url
 
