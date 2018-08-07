@@ -516,7 +516,10 @@ def LiveSports():
         if CBC_CA_BASE not in link:
             link = CBC_CA_BASE + link
         thumb = item.xpath('.//img')[0].get('src')
-        date = item.xpath('.//span[@class="medialist-date"]')[0].text
+        try:
+            date = item.xpath('.//span[@class="medialist-date"]')[0].text
+        except:
+            date = Datetime.ParseDate("Aug 07 2018 12:00AM")
         title = item.xpath('.//div[@class="medialist-title"]')[0].text
 
         oc.add(VideoClipObject(
@@ -564,8 +567,10 @@ def Category(category=None, link=None):
                 url = CBC_CA_BASE + url
 
             thumb = item.xpath('.//img')[0].get('src')
-            date = Datetime.ParseDate(item.xpath('.//span[@class="medialist-date"]')[0].text).date()
-
+            try:
+                date = Datetime.ParseDate(item.xpath('.//span[@class="medialist-date"]')[0].text).date()
+            except:
+                date = Datetime.ParseDate("Aug 07 2018 12:00AM")
             try:
                 duration = Datetime.MillisecondsFromString(item.xpath('.//span[@class="medialist-duration"]')[0].text)
             except:
@@ -609,8 +614,11 @@ def ShowsMenu(title, link):
                 url = CBC_CA_BASE + url
 
             thumb = item.xpath('.//img')[0].get('src')
-            date = Datetime.ParseDate(item.xpath('.//span[@class="medialist-date"]')[0].text).date()
-
+            try:
+                date = Datetime.ParseDate(item.xpath('.//span[@class="medialist-date"]')[0].text).date()
+            except:
+                date = Datetime.ParseDate("Aug 07 2018 12:00AM")
+                
             try:
                 duration = Datetime.MillisecondsFromString(item.xpath('.//span[@class="medialist-duration"]')[0].text)
             except:
@@ -647,8 +655,11 @@ def Featured(category=None):
 
         thumb = item.xpath('.//img')[0].get('src')
         title = item.xpath('.//p[@class="featured-title"]')[0].text
-        date = Datetime.ParseDate(item.xpath('.//p[@class="featured-date"]')[0].text).date()
-
+        try:
+            date = Datetime.ParseDate(item.xpath('.//p[@class="featured-date"]')[0].text).date()
+        except:
+            date = Datetime.ParseDate("Aug 07 2018 12:00AM")
+            
         try:
             duration = Datetime.MillisecondsFromString(item.xpath('.//p[@class="featured-duration"]')[0].text)
         except:
