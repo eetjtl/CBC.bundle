@@ -190,6 +190,8 @@ def DisplayShowItems(title=None, link=None, offset=0):
             raise Ex.MediaNotAvailable
 
         video_title = video_title[0]
+        if "Watch" in video_title:
+		    continue
         url = StripHTTPS(item.xpath('.//link/text()')[0])
         summary = item.xpath('.//description/text()')[0]
         guid = item.xpath('.//guid/text()')[0]
